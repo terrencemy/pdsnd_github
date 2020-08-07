@@ -20,3 +20,4 @@ Thanks to Udacity, stackoverflow & w3school, Thanks google
 20200807 21:08 - added update log section
 20200807 21:10 - reformat stuff
 20200807 21:12 - new changes
+20200807 21:48 - new changes 2
