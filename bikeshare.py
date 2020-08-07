@@ -364,10 +364,10 @@ def main():
         city, month, day = get_filters()
         df = load_data(city, month, day)
                 
-        #time_stats(df, city, month, day)
-        #station_stats(df, city, month, day)
-        #trip_duration_stats(df, city, month, day)
-        #user_stats(df, city, month, day)
+        time_stats(df, city, month, day)
+        station_stats(df, city, month, day)
+        trip_duration_stats(df, city, month, day)
+        user_stats(df, city, month, day)
         
         raw_data(df)
         
