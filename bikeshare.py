@@ -67,8 +67,8 @@ def load_data(city, month, day):
     
     #convert column type into datetime in dataframe
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    print(df['Start Time'].head())
-
+    
+    print(df.head())
     
     if month.lower() != 'all':
         if month.lower() == 'january':
@@ -99,7 +99,12 @@ def load_data(city, month, day):
             df = df.loc[(df['Start Time'].dt.dayofweek == 5)]
         elif day.lower() == 'sunday':
             df = df.loc[(df['Start Time'].dt.dayofweek == 6)]
-            
+    
+
+    df.reset_index(drop=True, inplace=True)
+    
+    #df = df.sort_index()
+    #print(df.head())
     return df
 
 
@@ -322,18 +327,50 @@ def user_stats(df, city, month, day):
         
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-
+    
+def raw_data(df):
+    """Displays raw data on bikeshare users."""
+    start_time = time.time()
+    start_rn = 0
+    raw = input('\nDo you want to check out raw data? (Y/n)\n')
+    while True:
+      if raw.upper() == 'Y':
+        while True:
+          rn = input('How many rows of raw data you would like to check?\n')
+          try:
+              rn = int(rn)
+              break
+          except ValueError:
+              print('Invalid input, please key in an integer.')
+          except rn <= 0:
+              print('Invalid input, please key in a positive number.')
+      
+        start_rn = start_rn
+        end_rn = start_rn + rn -1
+        print(df.loc[start_rn:end_rn])
+        start_rn = start_rn + rn
+      else:
+        break
+        
+      raw = input('\nDo you want to check out more raw data? (Y/n)\n')
+          
+        
+    
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)
 
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
                 
-        time_stats(df, city, month, day)
-        station_stats(df, city, month, day)
-        trip_duration_stats(df, city, month, day)
-        user_stats(df, city, month, day)
-
+        #time_stats(df, city, month, day)
+        #station_stats(df, city, month, day)
+        #trip_duration_stats(df, city, month, day)
+        #user_stats(df, city, month, day)
+        
+        raw_data(df)
+        
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
