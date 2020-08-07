@@ -16,3 +16,6 @@ washington.csv
 ### Credits
 Thanks to Udacity, stackoverflow & w3school, Thanks google
 
+### Update log
+20200807 21:08 - added update log section
+
